@@ -8,6 +8,7 @@ representing the Pascal's triangle of n
 
 
 def pascal_triangle(n):
+    """Pascal's Triangle"""
     if n <= 0:
         return []
 
