@@ -33,6 +33,9 @@ def canUnlockAll(boxes):
             return True
         return False
 
+    if len(boxes) == 0:
+        return True
+
     for i in range(1, len(boxes)):
         box_keys.append(i)
 
