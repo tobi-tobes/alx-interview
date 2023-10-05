@@ -23,6 +23,8 @@ def canUnlockAll(boxes):
                 continue
             if box[i] != 0:
                 unlocked.append(box[i])
+            if box[i] == i and len(box) == 1:
+                return
             canUnlockAllRec(boxes, unlocked, boxes[box[i]])
 
     unlocked = []
