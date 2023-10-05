@@ -33,7 +33,7 @@ def canUnlockAll(boxes):
     # print('All boxes:', boxes)
 
     if len(boxes) == 0:
-        return True
+        return False
     if len(boxes[0]) == 0:
         if len(boxes) == 1:
             return True
