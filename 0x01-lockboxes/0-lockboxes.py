@@ -28,21 +28,20 @@ def canUnlockAll(boxes):
             canUnlockAllRec(boxes, unlocked, boxes[box[i]])
 
     unlocked = []
-    box_keys = []
+    number_boxes_to_unlock = len(boxes) - 1
 
+    # print('All boxes:', boxes)
+
+    if len(boxes) == 0:
+        return True
     if len(boxes[0]) == 0:
         if len(boxes) == 1:
             return True
         return False
 
-    if len(boxes) == 0:
-        return True
-
-    for i in range(1, len(boxes)):
-        box_keys.append(i)
-
     canUnlockAllRec(boxes, unlocked, boxes[0])
 
-    if set(unlocked) == set(box_keys):
+    # print('Boxes unlocked:', unlocked)
+    if len(unlocked) == number_boxes_to_unlock:
         return True
     return False
