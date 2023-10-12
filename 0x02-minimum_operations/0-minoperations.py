@@ -15,7 +15,7 @@ def minOperations(n):
     """
     if n < 2:
         return 0
-    
+
     clipboard = ''
     no_of_ops = 0
     text = 'H'
