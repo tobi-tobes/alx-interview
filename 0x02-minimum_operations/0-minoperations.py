@@ -16,15 +16,15 @@ def minOperations(n):
     if n < 2:
         return 0
 
-    clipboard = ''
+    clipboard = 0
     no_of_ops = 0
     text = 'H'
 
     while len(text) < n:
         if n % len(text) == 0:
-            clipboard = text
+            clipboard = len(text)
             no_of_ops += 1
-        text = text + clipboard
+        text += text[:clipboard]
         no_of_ops += 1
 
     return no_of_ops
