@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 """
 0-stats.py
-This module contains a script that reads stdin line by line and computes metrics:
-Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size>
+This module contains a script that reads stdin
+line by line and computes metrics:
+Input format:
+<IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size>
 (if the format is not this one, the line must be skipped)
 After every 10 lines and/or a keyboard interruption (CTRL + C),
 print these statistics from the beginning:
@@ -25,24 +27,25 @@ if __name__ == '__main__':
         for line in sys.stdin:
             match = re.match(pattern, line)
             if match:
-                ip_address, date, request, status_code, file_size = match.groups()
-                if status_code not in possible_codes:
+                ip_address, date, request, status_code, file_size = \
+                    match.groups()
+                if int(status_code) not in possible_codes:
                     continue
                 if status_code in status_codes:
                     status_codes[status_code] += 1
                 else:
                     status_codes[status_code] = 1
-                total_file_size += file_size
+                total_file_size += int(file_size)
                 counter += 1
             if counter != 0 and counter % 10 == 0:
                 print("File size: {:d}".format(total_file_size))
                 sc_keys = sorted(status_codes.keys())
                 for key in sc_keys:
-                    print("{:d}: {:d}".format(key, status_codes[key]))
+                    print("{}: {:d}".format(key, status_codes[key]))
             else:
                 continue
     except KeyboardInterrupt:
         print("File size:", total_file_size)
-        sc_keys = status_codes.keys().sort()
+        sc_keys = sorted(status_codes.keys())
         for key in sc_keys:
-            print("{:d}: {:d}".format(key, status_codes[key]))
+            print("{}: {:d}".format(key, status_codes[key]))
