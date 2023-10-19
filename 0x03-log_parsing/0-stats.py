@@ -53,3 +53,8 @@ if __name__ == '__main__':
         sc_keys = sorted(status_codes.keys())
         for key in sc_keys:
             print("{:d}: {:d}".format(key, status_codes[key]))
+
+    print("File size:", total_file_size)
+    sc_keys = sorted(status_codes.keys())
+    for key in sc_keys:
+        print("{:d}: {:d}".format(key, status_codes[key]))
