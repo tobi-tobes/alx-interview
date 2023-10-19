@@ -32,6 +32,7 @@ if __name__ == '__main__':
                 try:
                     int_status_code = int(status_code)
                 except Exception:
+                    counter += 1
                     continue
                 if int_status_code not in possible_codes:
                     continue
@@ -47,6 +48,7 @@ if __name__ == '__main__':
                 for key in sc_keys:
                     print("{:d}: {:d}".format(key, status_codes[key]))
             else:
+                counter += 1
                 continue
     except KeyboardInterrupt:
         print("File size:", total_file_size)
