@@ -32,6 +32,7 @@ if __name__ == '__main__':
                 try:
                     int_status_code = int(status_code)
                 except Exception:
+                    total_file_size += int(file_size)
                     counter += 1
                     continue
                 if int_status_code not in possible_codes:
@@ -42,13 +43,12 @@ if __name__ == '__main__':
                     status_codes[int_status_code] = 1
                 total_file_size += int(file_size)
                 counter += 1
-            if counter != 0 and counter % 10 == 0:
-                print("File size: {:d}".format(total_file_size))
-                sc_keys = sorted(status_codes.keys())
-                for key in sc_keys:
-                    print("{:d}: {:d}".format(key, status_codes[key]))
+                if counter != 0 and counter % 10 == 0:
+                    print("File size: {:d}".format(total_file_size))
+                    sc_keys = sorted(status_codes.keys())
+                    for key in sc_keys:
+                        print("{:d}: {:d}".format(key, status_codes[key]))
             else:
-                counter += 1
                 continue
     except KeyboardInterrupt:
         print("File size:", total_file_size)
