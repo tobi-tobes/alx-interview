@@ -32,7 +32,6 @@ if __name__ == '__main__':
                 try:
                     int_status_code = int(status_code)
                 except Exception:
-                    total_file_size += int(file_size)
                     counter += 1
                     continue
                 if int_status_code not in possible_codes:
