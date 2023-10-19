@@ -29,23 +29,27 @@ if __name__ == '__main__':
             if match:
                 ip_address, date, request, status_code, file_size = \
                     match.groups()
-                if int(status_code) not in possible_codes:
+                try:
+                    int_status_code = int(status_code)
+                except Exception:
                     continue
-                if status_code in status_codes:
-                    status_codes[status_code] += 1
+                if int_status_code not in possible_codes:
+                    continue
+                if int_status_code in status_codes.keys():
+                    status_codes[int_status_code] += 1
                 else:
-                    status_codes[status_code] = 1
+                    status_codes[int_status_code] = 1
                 total_file_size += int(file_size)
                 counter += 1
             if counter != 0 and counter % 10 == 0:
                 print("File size: {:d}".format(total_file_size))
                 sc_keys = sorted(status_codes.keys())
                 for key in sc_keys:
-                    print("{}: {:d}".format(key, status_codes[key]))
+                    print("{:d}: {:d}".format(key, status_codes[key]))
             else:
                 continue
     except KeyboardInterrupt:
         print("File size:", total_file_size)
         sc_keys = sorted(status_codes.keys())
         for key in sc_keys:
-            print("{}: {:d}".format(key, status_codes[key]))
+            print("{:d}: {:d}".format(key, status_codes[key]))
