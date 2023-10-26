@@ -46,8 +46,8 @@ def validUTF8(data):
                 if i + 3 > len(data) \
                         or (data[i + j] & 0b11000000) != 0b10000000:
                     return False
-            else:
-                i += 4
+                else:
+                    i += 4
         else:
             return False
 
