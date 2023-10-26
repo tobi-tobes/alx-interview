@@ -39,15 +39,13 @@ def validUTF8(data):
                 if i + 2 > len(data) \
                         or (data[i + j] & 0b11000000) != 0b10000000:
                     return False
-                else:
-                    i += 3
+            i += 3
         elif (data[i] & 0b11111000) == 0b11110000:
             for j in range(1, 4):
                 if i + 3 > len(data) \
                         or (data[i + j] & 0b11000000) != 0b10000000:
                     return False
-                else:
-                    i += 4
+            i += 4
         else:
             return False
 
