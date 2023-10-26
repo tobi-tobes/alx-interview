@@ -29,7 +29,7 @@ def validUTF8(data):
         if data[i] in range(0, 128):
             i += 1
             continue
-        elif data[i] in range(194, 224):
+        elif data[i] in range(192, 224):
             try:
                 if data[i + 1] not in range(128, 192):
                     return False
