@@ -28,7 +28,6 @@ def validUTF8(data):
     while i < len(data):
         if (data[i] & 0b10000000) == 0:
             i += 1
-            continue
         elif (data[i] & 0b11100000) == 0b11000000:
             if i + 1 < len(data) and (data[i + 1] & 0b11000000) == 0b10000000:
                 i += 2
@@ -36,14 +35,18 @@ def validUTF8(data):
                 return False
         elif (data[i] & 0b11110000) == 0b11100000:
             for j in range(1, 3):
-                if i + 2 > len(data) \
-                        or (data[i + j] & 0b11000000) != 0b10000000:
+                if i + j < len(data) \
+                        and (data[i + j] & 0b11000000) == 0b10000000:
+                    continue
+                else:
                     return False
             i += 3
         elif (data[i] & 0b11111000) == 0b11110000:
             for j in range(1, 4):
-                if i + 3 > len(data) \
-                        or (data[i + j] & 0b11000000) != 0b10000000:
+                if i + j < len(data) \
+                        and (data[i + j] & 0b11000000) == 0b10000000:
+                    continue
+                else:
                     return False
             i += 4
         else:
