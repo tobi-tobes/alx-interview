@@ -26,35 +26,28 @@ def validUTF8(data):
     i = 0
 
     while i < len(data):
-        if data[i] in range(0, 128):
+        if (data[i] & 0b10000000) == 0:
             i += 1
             continue
-        elif data[i] in range(192, 224):
-            try:
-                if data[i + 1] not in range(128, 192):
+        elif (data[i] & 0b11100000) == 0b11000000:
+            if i + 1 < len(data) and (data[i + 1] & 0b11000000) == 0b10000000:
+                i += 2
+            else:
+                return False
+        elif (data[i] & 0b11110000) == 0b11100000:
+            for j in range(1, 3):
+                if i + 2 > len(data) \
+                        or (data[i + j] & 0b11000000) != 0b10000000:
                     return False
-            except Exception:
-                return False
-            i += 2
-            continue
-        elif data[i] in range(224, 240):
-            try:
-                for j in range(1, 3):
-                    if data[i + j] not in range(128, 192):
-                        return False
-            except Exception:
-                return False
-            i += 3
-            continue
-        elif data[i] in range(240, 248):
-            try:
-                for j in range(1, 4):
-                    if data[i + j] not in range(128, 192):
-                        return False
-            except Exception:
-                return False
-            i += 4
-            continue
+                else:
+                    i += 3
+        elif (data[i] & 0b11111000) == 0b11110000:
+            for j in range(1, 4):
+                if i + 3 > len(data) \
+                        or (data[i + j] & 0b11000000) != 0b10000000:
+                    return False
+            else:
+                i += 4
         else:
             return False
 
