@@ -39,7 +39,7 @@ def validUTF8(data):
             continue
         elif data[i] in range(224, 240):
             try:
-                for j in range(0, 2):
+                for j in range(1, 2):
                     if data[i + j] not in range(128, 192):
                         return False
             except Exception:
@@ -48,7 +48,7 @@ def validUTF8(data):
             continue
         elif data[i] in range(240, 248):
             try:
-                for j in range(0, 3):
+                for j in range(1, 3):
                     if data[i + j] not in range(128, 192):
                         return False
             except Exception:
