@@ -20,7 +20,7 @@ def validUTF8(data):
         return False
     if len(data) == 0:
         return False
-    if len(data) == 1 and (data[0] > 127 or data[0] < 0):
+    if len(data) == 1 and (data[0] & 0b10000000) != 0:
         return False
 
     i = 0
