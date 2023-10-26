@@ -52,4 +52,4 @@ def validUTF8(data):
         else:
             return False
 
-    return i == len(data)
+    return True
