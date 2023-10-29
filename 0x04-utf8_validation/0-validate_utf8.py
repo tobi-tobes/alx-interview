@@ -19,7 +19,7 @@ def validUTF8(data):
     if type(data) is not list:
         return False
     if len(data) == 0:
-        return False
+        return True
     if len(data) == 1 and (data[0] & 0b10000000) != 0:
         return False
 
