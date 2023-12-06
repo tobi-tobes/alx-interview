@@ -45,7 +45,7 @@ def isWinner(x, nums):
                 for j in range(i * 2, n + 1, i):
                     num_moves[j] += num_moves[i]
 
-        return "Maria" if num_moves[1] % 2 == 1 else "Ben"
+        return "Maria" if num_moves[1] % 2 == 0 else "Ben"
 
     maria_wins = 0
     ben_wins = 0
