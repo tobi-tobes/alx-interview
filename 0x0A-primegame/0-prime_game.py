@@ -22,43 +22,37 @@ who the winner of each game is.
 
 def isWinner(x, nums):
     """ Determines the winner """
-    def sieve_of_eratosthenes(limit):
-        """ Generates a set of prime numbers up to the limit """
-        primes = [True] * (limit + 1)
-        primes[0] = primes[1] = False
+    def is_prime(num):
+        """ Determines if a number is prime """
+        if num < 2:
+            return False
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                return False
+        return True
 
-        for i in range(2, int(limit**0.5) + 1):
-            if primes[i]:
-                for j in range(i*i, limit + 1, i):
-                    primes[j] = False
-
-        return {num for num, is_prime in enumerate(primes) if is_prime}
-
-    def optimal_move(nums, primes):
+    def optimal_move(nums):
         """ Determines optimal move """
         for num in nums:
-            if num in primes:
+            if is_prime(num):
                 return num
         return None
 
     maria_wins = 0
     ben_wins = 0
 
-    max_n = max(nums)
-    prime_set = sieve_of_eratosthenes(max_n)
-
     for i in range(x):
         current_nums = list(range(1, nums[i] + 1))
 
         while True:
-            maria_move = optimal_move(current_nums, prime_set)
+            maria_move = optimal_move(current_nums)
             if maria_move is None:
                 ben_wins += 1
                 break
             current_nums = [num for num in current_nums if num
                             % maria_move != 0]
 
-            ben_move = optimal_move(current_nums, prime_set)
+            ben_move = optimal_move(current_nums)
             if ben_move is None:
                 maria_wins += 1
                 break
