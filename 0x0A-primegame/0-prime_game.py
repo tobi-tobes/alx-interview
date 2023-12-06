@@ -43,7 +43,7 @@ def isWinner(x, nums):
             if i in primes:
                 num_moves[i] = 1
                 for j in range(i * 2, n + 1, i):
-                    num_moves[i] += num_moves[j]
+                    num_moves[j] += num_moves[i]
 
         return "Maria" if num_moves[1] % 2 == 1 else "Ben"
 
