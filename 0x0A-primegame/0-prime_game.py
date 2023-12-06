@@ -31,7 +31,6 @@ def isWinner(x, nums):
                 return False
         return True
 
-
     def optimal_move(nums):
         """ Determines optimal move """
         for num in nums:
@@ -39,19 +38,19 @@ def isWinner(x, nums):
                 return num
         return None
 
-
     maria_wins = 0
     ben_wins = 0
 
     for i in range(x):
         current_nums = list(range(1, nums[i] + 1))
-        
+
         while True:
             maria_move = optimal_move(current_nums)
             if maria_move is None:
                 ben_wins += 1
                 break
-            current_nums = [num for num in current_nums if num % maria_move != 0]
+            current_nums = [num for num in current_nums if num
+                            % maria_move != 0]
 
             ben_move = optimal_move(current_nums)
             if ben_move is None:
